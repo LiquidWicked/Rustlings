@@ -4,16 +4,14 @@
 // was, instead of just sometimes returning `None`. The 2nd test currently
 // does not compile or pass, but it illustrates the behavior we would like
 // this function to have.
-// Execute `rustlings hint errors1` for hints!
+// Execute `rustlings hint errors1rustlings hint errors1` for hints!
 
-// I AM NOT DONE
-
-pub fn generate_nametag_text(name: String) -> Option<String> {
+pub fn generate_nametag_text(name: String) -> Result<String, String> {
     if name.len() > 0 {
-        Some(format!("Hi! My name is {}", name))
+        Ok(format!("Hi! My name is {}", name))
     } else {
         // Empty names aren't allowed.
-        None
+        Err("`name` was empty; it must be nonempty.".to_string())
     }
 }
 
@@ -28,7 +26,7 @@ mod tests {
     fn generates_nametag_text_for_a_nonempty_name() {
         assert_eq!(
             generate_nametag_text("Beyoncé".into()),
-            Some("Hi! My name is Beyoncé".into())
+            Ok("Hi! My name is Beyoncé".into())
         );
     }
 
